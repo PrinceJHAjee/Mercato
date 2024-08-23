@@ -22,7 +22,7 @@ function Register() {
   const navigate=useNavigate();
   const dispatch=useDispatch();
 
-  //by gpt:
+  
   // Clear any existing token on login page load
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -30,20 +30,20 @@ function Register() {
     }
   }, []);
   const onFinish = async (values) => {
-    console.log('Submitting registration form:', values);
+    
     try {
       dispatch(SetLoader(true));
-      const startTime = Date.now();//by gpt to delay the loader
+      const startTime = Date.now();// to delay the loader
       const response= await RegisterUser(values); //call function created in users.js for register front end api call format
-      //by gpt to delay loader
+      
       
       const elapsedTime = Date.now() - startTime;
       const minimumLoadingTime = 1000; // Minimum loading time in milliseconds
       if (elapsedTime < minimumLoadingTime) {
         await sleep(minimumLoadingTime - elapsedTime);
-      } //till here
+      }
       dispatch(SetLoader(false));
-      console.log('Response received:', response);
+     
       if(response.success){
         message.success(response.message)
       }else{

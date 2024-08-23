@@ -1,4 +1,4 @@
-//global pages only the logged in users can access
+
 import React from "react";
 import { useEffect, useCallback, useState  } from "react";
 import { Avatar, Badge, message } from "antd";
@@ -14,7 +14,7 @@ function ProtectedPage({ children }) {
   const [notifications = [], setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const user = useSelector((state) => state.users.user);
-  // const [user, setUser] = React.useState(null);
+ 
   const navigate = useNavigate();
   const dispatch=useDispatch();
 
@@ -25,22 +25,18 @@ function ProtectedPage({ children }) {
       dispatch(SetLoader(false));
       console.log("GetCurrentUser response:", response); // Log the response
       if (response.success) {
-        console.log("Setting user:", response.data); // Log user data
-        // setUser(response.data);
+        
+        
         //dispatching the user data to the redux store
          dispatch(SetUser(response.data));
       }
 
-      // else {
-      //   navigate("/login");
-      //   message.error(response.message);
-      // }
-      //following line from chatgpt to add logic to refresh the token if it expires:
+      //to add logic to refresh the token if it expires:
       else {
         const refreshToken = localStorage.getItem("refreshToken");
         if (refreshToken) {
           const newTokenResponse = await RefreshToken(refreshToken);
-          console.log("RefreshToken response:", newTokenResponse); // Log the response
+          
           if (newTokenResponse.success) {
             localStorage.setItem("token", newTokenResponse.data);
             validateToken(); // Call validateToken again with the new token
@@ -55,7 +51,7 @@ function ProtectedPage({ children }) {
       }
     } catch (error) {
       dispatch(SetLoader(false));
-      // by gpt:Update the validateToken function to handle expired tokens properly, clear the expired token from localStorage, and redirect to the login page.
+      //Update the validateToken function to handle expired tokens properly, clear the expired token from localStorage, and redirect to the login page.
       localStorage.removeItem("token");
       navigate("/login");
       message.error(error.message);
@@ -107,7 +103,7 @@ function ProtectedPage({ children }) {
           <h1 className="text-white text-2xl cursor-pointer"
           onClick={()=>navigate("/")}>Mercato</h1>
           <div className="bg-white py-2 px-5 rounded flex gap-2 items-center">
-          {/* <i className="ri-user-fill"></i> */}
+          
             <span className=" cursor-pointer uppercase"
             onClick={() => {
               if(user.role==='user'){

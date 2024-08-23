@@ -3,7 +3,7 @@ const mongoose= require('mongoose');
 //added when error comes , by gpt
 require('dotenv').config(); // Ensure this line is present to load environment variables from the .env file
 
-console.log('MONGO_URL:', process.env.mongo_url);
+
 mongoose.connect(process.env.mongo_url);
 
 //creating connection object

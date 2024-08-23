@@ -1,7 +1,7 @@
 import { Col, Form, Input, Modal, Row, Tabs } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { message } from "antd";
-// import TextArea from "antd/es/input/TextArea";
+
 import { AddProduct, EditProduct } from "../../../apicalls/products";
 import { SetLoader } from "../../../redux/lodersSlice";
 import React, { useEffect } from "react";

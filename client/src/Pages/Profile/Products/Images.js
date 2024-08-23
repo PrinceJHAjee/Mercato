@@ -18,7 +18,7 @@ const Images = ({ selectedProduct, setShowProductForm, getData }) => {
       //upload image to coloudinary
       const formData = new FormData();
       formData.append("productId", selectedProduct._id);
-      formData.append("file", file); // Missing this line
+      formData.append("file", file);
       const response = await UploadProductImage(formData);
       dispatch(SetLoader(false));
       if (response && response.success) {

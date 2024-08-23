@@ -23,7 +23,7 @@ function Login() {
   const navigate = useNavigate()
   const dispatch= useDispatch();
 
-  //by gpt:
+  
   // Clear any existing token on login page load
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -34,14 +34,14 @@ function Login() {
   const onFinish =async (values) => {
     try {
       dispatch(SetLoader(true));
-      const startTime = Date.now();//by gpt to delay the loader
+      const startTime = Date.now();
       const response= await LoginUser(values);
-      //by gpt to delay loader
+      // to delay loader
       const elapsedTime = Date.now() - startTime;
-      const minimumLoadingTime = 1000; // Minimum loading time in milliseconds
+      const minimumLoadingTime = 1000; 
       if (elapsedTime < minimumLoadingTime) {
         await sleep(minimumLoadingTime - elapsedTime);
-      } //till here
+      } 
       dispatch(SetLoader(false));
       if(response.success){
         message.success(response.message);
@@ -77,10 +77,7 @@ function Login() {
          <Dividerr/> 
         <Form  layout="vertical"
            onFinish={onFinish}>
-            {/* don't required the name filed in the login page */}
-          {/* <Form.Item label="Name" name='name' rules={rules}>
-            <Input placeholder="Name" />
-          </Form.Item> */}
+            
           <Form.Item label="Email" name='email' rules={rules}>
             <Input placeholder="Email" autoComplete="email"  />
           </Form.Item>

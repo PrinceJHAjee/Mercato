@@ -14,17 +14,12 @@ const authMiddlewares = require("../middlewares/authMiddlewares");
     router.post('/register',async (req, res)=>{
         // always use try catch here generally
         try{
-            //we will have 3 parts for user registration
+            
             //1. check if user already exist
-            // console.log('Register request received');
-            console.log('Register request received with body:', req.body); // Add this line
+            
             const user=await User.findOne({email: req.body.email});
             if(user){
-                // return res.send({
-                //     success:false,
-                //     message:'User already exist'
-                // })
-                // or we can use this
+               
                 return res.status(400).send({
                   success: false,
                   message: 'User already exists',
@@ -45,8 +40,7 @@ const authMiddlewares = require("../middlewares/authMiddlewares");
                 });
             
         }catch(error){
-            // console.log('Error:', error.message);
-            console.error('Error in /register route:', error.message); // Add this line
+            
            res.status(500).send({
             
               success:false,
@@ -59,9 +53,9 @@ const authMiddlewares = require("../middlewares/authMiddlewares");
     //user login
     router.post("/login", async (req, res)=>{
         try {
-            // console.log('Login request received'); // Log when request is received
+            
             //1. check if user exist
-            console.log('Login request received with body:', req.body); // Add this line
+           
             const user = await User.findOne({email: req.body.email});
             if(!user){
                 throw new Error('User not found');
@@ -90,8 +84,7 @@ const authMiddlewares = require("../middlewares/authMiddlewares");
 
             
         } catch (error) {
-            // console.log('Error:', error.message); // Log errors
-            console.error('Error in /login route:', error.message); // Add this line
+            
             res.status(500).send({
                 success:false,
                 message:error.message
@@ -104,7 +97,7 @@ const authMiddlewares = require("../middlewares/authMiddlewares");
     //protected end point
 router.get("/get-current-user", authMiddlewares , async (req, res) => {
     try {
-        console.log('Fetching user with ID:', req.body.userId); // Add this line
+       
       const user= await User.findById(req.body.userId);
       if (!user) {
         return res.send({
@@ -142,12 +135,7 @@ router.post("/refresh-token", async (req, res) => {
 
         const userData = jwt.verify(refreshToken, refreshTokenSecret);
         const newToken = jwt.sign({ UserId: userData.UserId }, process.env.jwt_secret, { expiresIn: "7d" });
-        // res.send({
-        //     success: true,
-        //     message: "Token refreshed successfully",
-        //     data: newToken
-        // });
-        //following is from chatgpt for the Issue a refresh token along with the access token during login.
+       // for the Issue a refresh token along with the access token during login.
         res.send({
             success: true,
             message: 'User logged in successfully',

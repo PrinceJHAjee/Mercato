@@ -185,13 +185,12 @@ router.post(
           .send({ success: false, message: "No file uploaded" });
       }
       //upload image to cloudinary
-      console.log("File received:", req.file); // Log file info for debugging by gpt
-      console.log("Uploading to Cloudinary:", req.file.path); //by gpt
+      
 
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: "Mercato-product",
       });
-      console.log("Cloudinary Upload Result:", result);
+      
       const productId = req.body.productId;
       await Product.findByIdAndUpdate(productId, {
         $push: { images: result.secure_url },
@@ -202,7 +201,7 @@ router.post(
         data: result.secure_url,
       });
     } catch (error) {
-      console.error("Cloudinary Upload Error:", error);
+      
       res.status(500).send({
         success: false,
         message: error.message,
