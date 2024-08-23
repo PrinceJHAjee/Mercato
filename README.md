@@ -83,10 +83,3 @@ If you would like to contribute to Mercato, you can follow these steps:
  
 5. **Create a pull request**.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-You can copy and paste this directly into your README.md file. Just be sure to replace placeholders like `yourusername` with your actual GitHub username or other relevant details.
