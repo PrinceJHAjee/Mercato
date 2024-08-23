@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "ignore": ["./client", "./server/uploads/*"],
+    
+    "execMap": {
+      "rb": "ruby",
+      "pde": "processing --sketch={{pwd}} --run"
+    }
+  }
