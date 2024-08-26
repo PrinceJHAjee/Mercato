@@ -37,7 +37,10 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //need to start the server
-app.listen(port, ()=> console.log(`Node.js server started on port ${port}`));
+const server=app.listen(port, '0.0.0.0', ()=> console.log(`Node.js server started on port ${port}`));
 
+// Increase timeout settings
+server.keepAliveTimeout = 120000; // 120 seconds
+server.headersTimeout = 120000;   // 120 seconds
 
     
