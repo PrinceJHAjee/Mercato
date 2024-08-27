@@ -4,7 +4,7 @@ const cors = require('cors');
 require('dotenv').config(); // Ensure this is called to load environment variables from the .env file
 const app=express(); //initializing app variable
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://mercato-nomx.onrender.com'], // Allow both local and live origins
+    origin: ['http://localhost:3000', 'https://mercato-846n.onrender.com/'], // Allow both local and live origins
     optionsSuccessStatus: 200
   };
 app.use(cors(corsOptions)); //// Use cors middleware with options
