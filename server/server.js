@@ -5,6 +5,7 @@ require('dotenv').config(); // Ensure this is called to load environment variabl
 const app=express(); //initializing app variable
 const corsOptions = {
     origin: ['http://localhost:3000', 'https://mercato-846n.onrender.com/'], // Allow both local and live origins
+    credentials:true,   
     optionsSuccessStatus: 200
   };
 app.use(cors(corsOptions)); //// Use cors middleware with options
