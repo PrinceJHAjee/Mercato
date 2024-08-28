@@ -10,6 +10,16 @@
     font-family: 'Montserrat', sans-serif !important;
     /* color: #373737; */
     font-size: 16px;
+     /* Responsive font-size adjustments */
+     @screen sm {
+        font-size: 14px;
+    }
+    @screen md {
+        font-size: 16px;
+    }
+    @screen lg {
+        font-size: 18px;
+    }
     }   
 
    /*register form styling  */
@@ -17,6 +27,15 @@
     min-height: 45px !important;
     border: 1px solid rgb(246, 242, 242) !important;
     width: 100%;
+    padding: 0.5rem;
+
+     /* Make inputs responsive */
+     @screen sm {
+        min-height: 40px;
+    }
+    @screen md {
+        min-height: 45px;
+    }
 
    }
    input:focus, textarea:focus, select:focus{
@@ -29,13 +48,57 @@
    table{
     border: #a1a1a1 1pdx solid !important;
     border-radius: 2px !important;
+
+     /* Ensure tables are responsive */
+     width: 100%;
+     overflow-x: auto;
+     display: block;
    }
 
    i{
     font-size: 20px !important;
+     /* Make icons responsive */
+     @screen sm {
+        font-size: 16px;
+    }
+    @screen lg {
+        font-size: 24px;
+    }
    }
 
    .max-width{
     max-width: max-content !important;
     
    }
+
+   /* Ensuring that the image container for the carousel adjusts on smaller screens */
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden; /* Hide overflow for a cleaner look */
+}
+
+/* Adjust image size in the carousel for mobile devices */
+@media (max-width: 768px) {
+    .carousel-container img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Adjust image size in the carousel for tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .carousel-container img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Adjust arrow button sizes for better usability on smaller devices */
+.carousel-container button {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+}
+
+   

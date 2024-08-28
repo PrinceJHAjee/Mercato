@@ -80,7 +80,7 @@ function Bids({ showBidsModal, setShowBidsModal, selectedProduct }) {
       open={showBidsModal}
       onCancel={() => setShowBidsModal(false)}
       centered
-      width={1500}
+      width={window.innerWidth > 768 ? 1500 : '90%'}
       footer={null}
     >
    <div className="flex flex-col gap-3">

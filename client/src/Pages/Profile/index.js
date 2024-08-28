@@ -17,7 +17,7 @@ function Profile() {
         <UserBids/>
         </Tabs.TabPane>
         <Tabs.TabPane tab="General" key="3">
-        <div className="flex flex-col w-1/3">
+        <div className="flex flex-col md:w-1/3 p-2 md:p-0">
   <span className="text-xl flex justify-between">
     Name: <span className="text-xl">{user.name}</span>
   </span>

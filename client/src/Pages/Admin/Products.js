@@ -154,7 +154,8 @@ function Products() {
 
   return (
     <div>
-      <Table columns={columns} dataSource={products} />
+      <Table columns={columns} dataSource={products} pagination={false}
+  scroll={{ x: '100%' }} />
     </div>
   );
 }

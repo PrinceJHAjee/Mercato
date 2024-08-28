@@ -47,8 +47,11 @@ const ages = [
 ];
 function Filters({ showFilters, setShowFilters, filters, setFilters }) {
   return (
-    <div className="w-72 flex flex-col">
-      <div className="flex justify-between">
+    
+    <div className={`fixed p-4 top-0 left-0 w-52 bg-white shadow-md z-50 transition-transform transform ${
+      showFilters ? "translate-x-0" : "-translate-x-full"
+    } sm:w-full md:w-1/3 lg:w-1/4 h-full`}>
+      <div className="flex justify-between p-4 border-b">
         <h1 className="text-[#002F34]  text-xl">Filters</h1>
         <i
           className="ri-close-line  text-xl cursor-pointer"

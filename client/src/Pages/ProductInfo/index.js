@@ -1,6 +1,7 @@
 import React from "react";
+import  { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { GetAllBids, GetProductById, GetProducts } from "../../apicalls/products";
+import { GetAllBids, GetProductById} from "../../apicalls/products";
 import { SetLoader } from "../../redux/lodersSlice";
 import { useDispatch } from "react-redux";
 import { Button, message } from "antd";
@@ -9,15 +10,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import BidModal from "./BidModal";
 
+
 function ProductInfo() {
     const { user } = useSelector((state) => state.users);
   const [product, setProduct] = React.useState(null);
   const [showAddNewBid, setShowAddNewBid] = React.useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = React.useState(0);
+   // New state to manage the starting index of visible images
+   const [startImageIndex, setStartImageIndex] = React.useState(0);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const getData = async () => {
+  
+  const getData =useCallback( async () => {
     try {
       dispatch(SetLoader(true));
       const response = await GetProductById(id);
@@ -33,24 +39,40 @@ function ProductInfo() {
       dispatch(SetLoader(false));
       message.error(error.message);
     }
-  };
+  }, [dispatch, id]);
+
   React.useEffect(() => {
     getData();
-  }, []);
+    
+  }, [getData]);
+
+   // Function to handle moving to the next set of images
+   const handleNext = () => {
+    if (startImageIndex + 2 < product.images.length) {
+      setStartImageIndex(startImageIndex + 1);
+    }
+  };
+
+  // Function to handle moving to the previous set of images
+  const handlePrev = () => {
+    if (startImageIndex > 0) {
+      setStartImageIndex(startImageIndex - 1);
+    }
+  };
 
   return (
     product && (
       <div>
-        <div className="grid grid-cols-2 gap-5 mt-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
           {/*  col for images */}
           <div className="flex flex-col gap-5">
             <img
               src={product.images[selectedImageIndex]}
-              className="w-full h-full object-cover rounded-md md-2"
+              className="w-full h-64 md:h-full object-cover rounded-md"
               alt=""
             />
             {/* for other small images */}
-            <div className="flex gap-5">
+            {/* <div className="flex gap-5">
               {product.images.map((image, index) => {
                 return (
                   <img
@@ -66,7 +88,42 @@ function ProductInfo() {
                   />
                 );
               })}
+            </div> */}
+             {/* New code: Carousel for other small images */}
+             <div className="flex items-center gap-2">
+              {/* Left arrow (only show if not at the start) */}
+              {startImageIndex > 0 && (
+                <button onClick={handlePrev} className="text-gray-600 p-2 sm:p-1 md:p-2 lg:p-3">
+                  &lt;
+                </button>
+              )}
+              {/* Display only two images at a time */}
+              <div className="flex gap-2 overflow-hidden">
+                {product.images.slice(startImageIndex, startImageIndex + 2).map((image, index) => {
+                  return (
+                    <img
+                      key={index}
+                      src={image}
+                      className={
+                        "w-20 h-20 object-cover rounded-md cursor-pointer sm:w-16 sm:h-16 md:w-20 md:h-20" +
+                        (selectedImageIndex === startImageIndex + index
+                          ? " border-2 border-green-700 border-solid p-2"
+                          : "")
+                      }
+                      onClick={() => setSelectedImageIndex(startImageIndex + index)}
+                      alt=""
+                    />
+                  );
+                })}
+              </div>
+              {/* Right arrow (only show if not at the end) */}
+              {startImageIndex + 2 < product.images.length && (
+                <button onClick={handleNext} className="text-gray-600 p-2 sm:p-1 md:p-2 lg:p-3">
+                  &gt;
+                </button>
+              )}
             </div>
+            {/* End of new code */}
             <Dividerr />
 
             <div>
@@ -78,7 +135,7 @@ function ProductInfo() {
 
           </div>
 
-          {/* for info */}
+          {/* for product  info */}
           <div className="flex flex-col gap-3">
             <div>
               <h1 className="text-2xl font-semibold text-[#002F34]">

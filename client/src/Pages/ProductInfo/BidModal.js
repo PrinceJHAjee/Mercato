@@ -45,9 +45,9 @@ function BidModal({ showBidModal, setShowBidModal, product, reloadData }) {
   };
   return (
     <Modal onCancel={() => setShowBidModal(false)} open={showBidModal} centered
-    width={600}
+    width={window.innerWidth > 768 ? 1500 : '90%'} 
     onOk={() => formRef.current.submit()}>
-      <div className="flex flex-col gap-5 mb-5">
+      <div className="flex flex-col gap-5 overflow-x-auto">
         <h1 className="text-2xl font-semibold text-[#002F34]  text-center">
           New Bid
         </h1>

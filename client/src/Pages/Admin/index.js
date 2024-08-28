@@ -18,7 +18,7 @@ function Admin() {
 
 
   return (
-    <div>
+    <div className="p-2 md:p-5">
       <Tabs>
         <Tabs.TabPane tab="Products" key="1">
           <Products/>

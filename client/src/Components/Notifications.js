@@ -40,7 +40,7 @@ function Notifications({
       onCancel={() => setShowNotifications(false)}
       footer={null}
       centered
-      width={1000}
+      width={window.innerWidth > 768 ? 1000 : '90%'}
     >
       <div className="flex flex-col gap-2">
         {notifications.map((notification) => (

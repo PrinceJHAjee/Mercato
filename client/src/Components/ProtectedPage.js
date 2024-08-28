@@ -99,8 +99,8 @@ function ProtectedPage({ children }) {
      user && (
       <div> 
         {/* header */}
-        <div className="flex justify-between items-center bg-primary p-5">
-          <h1 className="text-white text-2xl cursor-pointer"
+        <div className="flex justify-between items-center bg-primary p-5 flex-col md:flex-row">
+          <h1 className="text-white text-2xl cursor-pointer  mb-2 md:mb-0"
           onClick={()=>navigate("/")}>Mercato</h1>
           <div className="bg-white py-2 px-5 rounded flex gap-2 items-center">
           

@@ -117,7 +117,8 @@ function Users() {
 
   return (
     <div>
-      <Table columns={columns} dataSource={users} />
+      <Table columns={columns} dataSource={users} pagination={false}
+  scroll={{ x: '100%' }}/>
     </div>
   );
 }

@@ -62,10 +62,10 @@ const Images = ({ selectedProduct, setShowProductForm, getData }) => {
   }
   return (
     <div>
-      <div className="flex gap-5 mb-5">
+      <div className="flex flex-wrap gap-5 mb-5">
         {images.map((image) => {
           return (
-            <div className="flex gap-2 border border-solid border-gray-500 rounded p-5 items-end">
+            <div className="flex gap-2 border border-solid border-gray-500 rounded p-5 items-end w-full md:w-auto">
               <img className="h-20 w-20 object-cover" src={image} alt={image} />
               <i className="ri-delete-bin-line" onClick={() => deleteImage(image)}></i>
             </div>
@@ -82,7 +82,7 @@ const Images = ({ selectedProduct, setShowProductForm, getData }) => {
         
         showUploadList={showPreview}
       >
-        <Button type="dashed">Upload Images</Button>
+        <Button className="w-full md:w-auto" type="dashed">Upload Images</Button>
       </Upload>
 
       <div className="flex justify-end gap-5 mt-5">

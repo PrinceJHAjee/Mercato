@@ -66,8 +66,8 @@ function Register() {
    
 
   return (
-    <div className="h-screen bg-primary flex justify-center items-center">
-      <div className="bg-white p-5 rounded w-[450px]">
+    <div className="h-screen bg-primary flex justify-center items-center p-2 md:p-0">
+      <div className="bg-white p-5 rounded max-w-[450px]">
 
         <h1 className="text-primary text-2xl text-center">
           Mercato - <span className="text-gray-400 text-2xl">REGISTER</span>

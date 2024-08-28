@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useCallback } from 'react';
+
 import { GetProducts } from '../../apicalls/products';
 import { SetLoader } from '../../redux/lodersSlice';
 import { useDispatch } from 'react-redux';
@@ -10,7 +10,7 @@ import Filters from './Filters';
 
 
 function Home() {
-  const [showFilters, setShowFilters] = React.useState(true);
+  const [showFilters, setShowFilters] = React.useState(false);
   const [products , setProducts] = React.useState([])
     const [filters , setFilters] = React.useState({
       status: 'approved',
@@ -20,9 +20,9 @@ function Home() {
     })
     const navigate= useNavigate();
   const dispatch=useDispatch();
-  const {user} = useSelector((state) => state.users);
-
-  const getData =async ()=>{
+  // const {user} = useSelector((state) => state.users);
+ // eslint-disable-next-line
+  const getData =useCallback(async ()=>{
     try {
       dispatch(SetLoader(true));
       const response =await GetProducts(filters)
@@ -36,13 +36,13 @@ function Home() {
       dispatch(SetLoader(false));
         message.error(error.message)
     }
-  }
+  }, [dispatch, filters]);
  
   
  
   useEffect(()=>{
     getData()
-  },[filters]);
+  },[filters, getData]);
 
   return (
     <div className="flex gap-5">
@@ -75,7 +75,7 @@ function Home() {
       </div>
       <div
         className={`
-      grid gap-5 ${showFilters ? "grid-cols-4" : "grid-cols-5"}
+      grid gap-5 ${showFilters ? "grid-cols-2 md:grid-cols-4" : "grid-cols-2 md:grid-cols-5"}
     `}
       >
         {products?.map((product) => {
@@ -87,7 +87,7 @@ function Home() {
             >
               <img
                 src={product.images[0]}
-                className="w-full h-52 p-2 rounded-md object-cover"
+                className="w-full h-52 md:h-72 p-2 rounded-md object-cover"
                 alt=""
               />
               <div className="px-2 flex flex-col">
