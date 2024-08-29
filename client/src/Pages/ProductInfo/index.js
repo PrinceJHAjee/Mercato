@@ -1,5 +1,5 @@
 import React from "react";
-import  { useCallback } from "react";
+
 import { useSelector } from "react-redux";
 import { GetAllBids, GetProductById} from "../../apicalls/products";
 import { SetLoader } from "../../redux/lodersSlice";
@@ -23,7 +23,7 @@ function ProductInfo() {
   const dispatch = useDispatch();
   const { id } = useParams();
   
-  const getData =useCallback( async () => {
+  const getData = async () => {
     try {
       dispatch(SetLoader(true));
       const response = await GetProductById(id);
@@ -39,12 +39,12 @@ function ProductInfo() {
       dispatch(SetLoader(false));
       message.error(error.message);
     }
-  }, [dispatch, id]);
+  };
 
   React.useEffect(() => {
     getData();
     
-  }, [getData]);
+  }, []);
 
    // Function to handle moving to the next set of images
    const handleNext = () => {
@@ -152,7 +152,7 @@ function ProductInfo() {
               </h1>
               <div className="flex justify justify-between mt-5">
                 <span>Price</span>
-                <span>$ {product.price}</span>
+                <span>₹ {product.price}</span>
               </div>
               
               <div className="flex justify-between mt-2">

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 
 import { GetProducts } from '../../apicalls/products';
 import { SetLoader } from '../../redux/lodersSlice';
@@ -7,6 +7,7 @@ import { message } from 'antd';
 import Dividerr from '../../Components/Dividerr';
 import { useNavigate } from 'react-router-dom'; 
 import Filters from './Filters';
+import { useSelector } from 'react-redux';
 
 
 function Home() {
@@ -20,9 +21,9 @@ function Home() {
     })
     const navigate= useNavigate();
   const dispatch=useDispatch();
-  // const {user} = useSelector((state) => state.users);
- // eslint-disable-next-line
-  const getData =useCallback(async ()=>{
+  const {user} = useSelector((state) => state.users);
+ 
+  const getData =async ()=>{
     try {
       dispatch(SetLoader(true));
       const response =await GetProducts(filters)
@@ -36,13 +37,13 @@ function Home() {
       dispatch(SetLoader(false));
         message.error(error.message)
     }
-  }, [dispatch, filters]);
+  };
  
   
  
   useEffect(()=>{
     getData()
-  },[filters, getData]);
+  },[filters]);
 
   return (
     <div className="flex gap-5">

@@ -15,12 +15,15 @@ router.post("/add-product", authMiddleware, async (req, res) => {
     const newProduct = new Product(req.body);
     await newProduct.save();
 
+     // Fetch the user information
+     const user = await User.findById(req.body.userId);
+
     // send notification to admin
     const admins = await User.find({ role: "admin" });
     admins.forEach(async (admin) => {
       const newNotification = new Notification({
         user: admin._id,
-        message: `New product added by ${req.user.name}`,
+        message: `New product added by ${user.name}`,
         title: "New Product",
         onClick: `/admin`,
         read: false,
@@ -216,6 +219,20 @@ router.put("/update-product-status/:id", authMiddleware, async (req, res) => {
     const {status}=req.body;
     await Product.findByIdAndUpdate
     (req.params.id, {status});
+
+    // Find the product by ID and update its status
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true } // This option returns the updated product
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).send({
+        success: false,
+        message: "Product not found",
+      });
+    }
 
     // send notification to seller
     const newNotification = new Notification({
