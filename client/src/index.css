@@ -385,3 +385,27 @@ body {
   background-color: #1c1c1c !important; /* Ensure the dark background is applied */
   color: #e0e0e0 !important; /* Ensure the text color is applied */
 }
+
+/* style for boice search icon */
+/* Add this to your CSS file */
+.voice-search-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: inherit; /* Inherit color from parent element */
+  margin-left: 8px;
+}
+
+.voice-search-button.dark-mode {
+  color: #e0e0e0; /* Light color for dark mode */
+}
+
+.voice-search-button.light-mode {
+  color: #333; /* Dark color for light mode */
+}
+
+.voice-search-button.listening {
+  color: #28a745; /* Change color when listening */
+}
+

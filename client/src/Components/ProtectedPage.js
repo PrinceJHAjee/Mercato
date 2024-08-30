@@ -154,10 +154,12 @@ function ProtectedPage({ children, isDarkMode, toggleDarkMode }) {
                   isDarkMode ? (
                     <i className="ri-notification-2-line"></i>
                   ) : (
-                    <i className="ri-notification-3-line"></i>
+                    <i className="ri-notification-2-fill"></i>
                   )
                 }
-                style={{ backgroundColor: isDarkMode ? "#2c2c2c" : "#ffffff" }}
+                style={{ backgroundColor: isDarkMode ? "#2c2c2c" : "#ffffff",
+                  color: isDarkMode ? "#ffffff" : "#000000", // Ensure icon color contrasts with background
+                 }}
               />
             </Badge>
 

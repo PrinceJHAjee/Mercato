@@ -8,6 +8,7 @@ import Dividerr from "../../Components/Dividerr";
 import { useNavigate } from "react-router-dom";
 import Filters from "./Filters";
 import { useSelector } from "react-redux";
+import VoiceSearchButton from "../../Components/VoiceSearchButton";
 
 function Home({ isDarkMode, toggleDarkMode }) {
   const [showFilters, setShowFilters] = React.useState(false);
@@ -39,6 +40,12 @@ function Home({ isDarkMode, toggleDarkMode }) {
   useEffect(() => {
     getData();
   }, [filters]);
+
+  //for handling voice search
+  const handleVoiceSearch = (searchTerm) => {
+    setFilters({ ...filters, search: searchTerm });
+    getData();
+  };
 
   return (
     <div className={isDarkMode ? "dark-mode" : "light-mode"}>
@@ -78,6 +85,8 @@ function Home({ isDarkMode, toggleDarkMode }) {
                 (e) => setFilters({ ...filters, search: e.target.value }) // update search state
               }
             />
+            {/* voice search */}
+            <VoiceSearchButton isDarkMode={isDarkMode} onSearch={handleVoiceSearch} className="absolute right-2 top-1/2 transform -translate-y-1/2" />
           </div>
           <div
             className={`
