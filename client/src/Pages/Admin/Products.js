@@ -1,14 +1,15 @@
 import { Button, message, Table } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { SetLoader } from "../../redux/lodersSlice";
 import { GetProducts, UpdateProductStatus } from "../../apicalls/products";
 
-function Products() {
+function Products({isDarkMode}) {
   const [products, setProducts] = React.useState([]);
 
   const dispatch = useDispatch();
+   
 
   const getData = async () => {
     try {
@@ -148,6 +149,9 @@ function Products() {
     },
   ];
 
+  // Apply dark mode styles conditionally
+const tableClassName = isDarkMode ? 'dark-table' : 'light-table';
+
   useEffect(() => {
     getData();
   }, []);
@@ -155,7 +159,9 @@ function Products() {
   return (
     <div>
       <Table columns={columns} dataSource={products} pagination={false}
-  scroll={{ x: '100%' }} />
+  scroll={{ x: '100%' }}
+  className={tableClassName} //   Add this line to apply dark mode styles
+     />
     </div>
   );
 }

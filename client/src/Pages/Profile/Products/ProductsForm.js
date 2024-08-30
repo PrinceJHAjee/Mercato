@@ -89,7 +89,7 @@ function ProductsForm({ showProductForm, setShowProductForm, selectedProduct, ge
       {...(selectedTab==="2" && {footer: false})}
      
     >
-      <div>
+      <div className="dark">
         <h1 className="text-primary rext-2xl text-center font-semibold uppercase">
           {selectedProduct ? "Edit Product" : "Add Product"}
         </h1>

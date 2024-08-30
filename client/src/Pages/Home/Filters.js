@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 const categories = [
   {
@@ -46,13 +47,23 @@ const ages = [
   },
 ];
 function Filters({ showFilters, setShowFilters, filters, setFilters }) {
+//for dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check if dark mode is active from local storage or any other source
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+      setIsDarkMode(true);
+    }
+  }, []);
   return (
     
     <div className={`fixed p-4 top-0 left-0 w-52 bg-white shadow-md z-50 transition-transform transform ${
       showFilters ? "translate-x-0" : "-translate-x-full"
-    } sm:w-full md:w-1/3 lg:w-1/4 h-full`}>
-      <div className="flex justify-between p-4 border-b">
-        <h1 className="text-[#002F34]  text-xl">Filters</h1>
+    } sm:w-full md:w-1/3 lg:w-1/4 h-full  filters-container ${isDarkMode ? "dark" : ""}`}>
+      <div  className="flex justify-between p-4 border-b">
+        <h1 className={`text-xl ${isDarkMode? "text-[#90caf9]":"text-[#002F34]"}`} >Filters</h1>
         <i
           className="ri-close-line  text-xl cursor-pointer"
           onClick={() => setShowFilters(!showFilters)}
@@ -60,7 +71,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
       </div>
 
       <div className="flex flex-col gap-1 mt-5">
-        <h1 className="text-gray-600">Categories</h1>
+        <h1 className={`mt-5 ${isDarkMode ? "text-[#e0e0e0]" : "text-gray-600"}`}>Categories</h1>
 
         <div className="flex flex-col">
           {categories.map((category) => {
@@ -93,7 +104,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
           })}
         </div>
 
-        <h1 className="text-gray-600 mt-5">Ages</h1>
+        <h1 className={`mt-5 ${isDarkMode ? "text-[#e0e0e0]" : "text-gray-600"}`}>Ages</h1>
 
         <div className="flex flex-col">
           {ages.map((age) => {

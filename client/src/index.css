@@ -44,6 +44,7 @@
     box-shadow: none !important;
 
    }
+   /* table styling */
 
    table{
     border: #a1a1a1 1pdx solid !important;
@@ -54,7 +55,26 @@
      overflow-x: auto;
      display: block;
    }
+   /* Ensure table takes up only necessary space based on content */
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
 
+/* Make sure each table column has a minimum width */
+.table-container th,
+.table-container td {
+  min-width: 100px; /* Adjust min-width as necessary */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Ensure the table expands based on content */
+.table-container table {
+  width: 100%; /* Table should take full width */
+  table-layout: auto; /* Columns expand according to their content */
+}
+
+   /* icon styling */
    i{
     font-size: 20px !important;
      /* Make icons responsive */
@@ -101,4 +121,267 @@
     font-size: 1.5rem;
 }
 
-   
+/* -----------------------------------------FOR DARK MODES-------------------------------------- */
+/* index.css */
+body {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .dark body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  
+  /* Adjust other elements for dark mode */
+  header, nav, .footer {
+    background-color: #ffffff;
+    color: #333333;
+  }
+
+  /* Navbar adjustments for dark mode */
+.dark nav, .dark .header {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Profile text adjustments for dark mode */
+.dark .profile-name, .dark .profile-section {
+  color: #e0e0e0;
+}
+  
+  .dark header, .dark nav, .dark .footer {
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+  }
+  
+  button, .card {
+    background-color: #f9f9f9;
+    color: #333333;
+  }
+  
+  .dark button, .dark .card {
+    background-color: #333;
+    color: #e0e0e0;
+  }
+  
+  /* Ensure inputs, textareas, etc., also match */
+  input, textarea, select {
+    background-color: #ffffff;
+    color: #333333;
+  }
+  
+  .dark input, .dark textarea, .dark select {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    border: 1px solid #444;
+  }
+  
+  /* Handle links in dark mode */
+  a {
+    color: #007bff;
+  }
+  
+  .dark a {
+    color: #90caf9;
+  }
+
+  /* -----------------------------------------NEW ADDITIONS FOR SPECIFIC ELEMENTS IN DARK MODE-------------------------------------- */
+
+/* Navbar adjustments for dark mode */
+.dark nav, .dark .header {
+    background-color: #121212; /* Dark background for navbar */
+    color: #e0e0e0; /* Light text for navbar */
+}
+
+/* Profile text adjustments for dark mode */
+.dark .profile-name, .dark .profile-section {
+    color: #e0e0e0; /* Whitish text for profile in dark mode */
+}
+
+/* Table adjustments for dark mode */
+.dark .table, .dark .table th, .dark .table td {
+    background-color: #1c1c1c; /* Dark background for table */
+    color: #e0e0e0; /* Whitish text for table in dark mode */
+    border-color: #333333; /* Darker border */
+}
+
+/* Tab section styling */
+.tabs .tab {
+    background-color: #ffffff; /* White background initially */
+    color: #333; /* Dark text */
+}
+
+/* Dark mode for tabs */
+.dark .tabs .tab {
+    background-color: #2c2c2c; /* Dark background in dark mode */
+    color: #e0e0e0; /* Whitish text */
+}
+
+/* Active tab styling */
+.tabs .tab.active, .dark .tabs .tab.active {
+    background-color: #121212; /* Darker background when active */
+    color: #ffffff; /* White text when active */
+}
+/* ....................................... */
+
+
+/* ////////////////////////////// */
+/* Dark mode table styles */
+.dark-table .ant-table-thead > tr > th,
+.dark-table .ant-table-tbody > tr > td {
+  background-color: #1e1e1e !important;  /* Dark background */
+  color: #e0e0e0 !important; /* Light text */
+  border-color: #444 !important; /* Darker border */
+}
+
+.light-table .ant-table-thead > tr > th,
+.light-table .ant-table-tbody > tr > td {
+  background-color: #ffffff; /* Light background */
+  color: #333333; /* Dark text */
+}
+
+/* Dark mode tab styles */
+.dark-tabs .ant-tabs-tab,
+.dark-tabs .ant-tabs-tab-active {
+  background-color: #2e2e2e; /* Dark tab background */
+  color: #e0e0e0; /* Light text */
+}
+
+.light-tabs .ant-tabs-tab,
+.light-tabs .ant-tabs-tab-active {
+  background-color: #ffffff; /* Light tab background */
+  color: #333333; /* Dark text */
+}
+/* Dark mode for table row hover */
+.dark-table .ant-table-tbody > tr:hover > td {
+  background-color: #2c2c2c !important; /* Darker background on hover */
+}
+
+/* Dark mode for no data state in table */
+.dark .dark-table .ant-table-placeholder {
+  background-color: #1e1e1e !important; /* Dark background for no data state */
+  color: #e0e0e0 !important; /* Light text for no data state */
+}
+
+
+/* Force background color for the entire table container */
+.dark .table-container {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+}
+
+/* Ensure the table container takes full width but respects the content */
+.table-container {
+  width: 100% !important;
+  min-width: 600px; /* Adjust as needed */
+  overflow-x: auto;
+}
+
+/* Dark mode for links */
+.dark a {
+  color: #90caf9; /* Light blue text for dark mode */
+}
+
+/* Dark mode table styles with !important */
+.dark-table .ant-table-thead > tr > th,
+.dark-table .ant-table-tbody > tr > td {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+}
+
+
+/* -------------------------- */
+/* styling for add product form.js */
+/* Added dark mode styling for modal form components */
+
+/* Dark mode for the entire modal, including the header, body, and footer */
+.dark .ant-modal-content {
+  background-color: #1e1e1e; /* Dark background for the entire modal */
+  color: #e0e0e0; /* Light text */
+}
+
+/* Dark mode for modal header */
+.dark .ant-modal-header {
+  background-color: #1e1e1e; /* Dark background */
+  border-bottom: 1px solid #444; /* Darker border */
+}
+
+/* Dark mode for modal title */
+.dark .ant-modal-title {
+  color: #e0e0e0; /* Light text for title */
+}
+
+/* Dark mode for modal body */
+.dark .ant-modal-body {
+  background-color: #1e1e1e; /* Dark background */
+}
+
+/* Dark mode for modal footer */
+.dark .ant-modal-footer {
+  background-color: #1e1e1e; /* Dark background */
+  border-top: 1px solid #444; /* Darker border */
+}
+
+/* Dark mode for buttons in the modal */
+.dark .ant-modal-footer button {
+  background-color: #333; /* Dark button background */
+  color: #e0e0e0; /* Light text */
+  border: none;
+}
+
+.dark .ant-modal-footer button:hover {
+  background-color: #444; /* Darker on hover */
+}
+
+/* Dark mode for input, textarea, select elements */
+.dark .ant-input,
+.dark .ant-select-selector,
+.dark .ant-input-affix-wrapper,
+.dark textarea {
+  background-color: #2c2c2c; /* Dark background */
+  color: #e0e0e0; /* Light text */
+  border: 1px solid #444; /* Darker border */
+}
+
+/* Dark mode for form labels */
+.dark .ant-form-item-label > label {
+  color: #e0e0e0; /* Light text for labels */
+}
+
+/* Dark mode for form placeholders */
+.dark .ant-input::placeholder,
+.dark textarea::placeholder {
+  color: #888; /* Slightly lighter placeholder text */
+}
+
+/* Dark mode for tabs */
+.dark .ant-tabs-nav .ant-tabs-tab {
+  background-color: #2c2c2c; /* Dark background for tabs */
+  color: #e0e0e0; /* Light text */
+}
+
+.dark .ant-tabs-nav .ant-tabs-tab-active {
+  background-color: #121212; /* Darker background for active tab */
+  color: #ffffff; /* White text for active tab */
+}
+
+/* Ensure the border of the form fields is also dark */
+.dark .ant-form-item-control-input-content > input,
+.dark .ant-form-item-control-input-content > select {
+  border: 1px solid #444; /* Darker border */
+}
+
+/* Adjust the color of the checkboxes and radio buttons */
+.dark .ant-checkbox-checked .ant-checkbox-inner,
+.dark .ant-radio-checked .ant-radio-inner {
+  background-color: #1c1c1c; /* Dark background */
+  border-color: #e0e0e0; /* Light border */
+}
+
+
+/* Dark mode background for Filters component */
+.dark .filters-container {
+  background-color: #1c1c1c !important; /* Ensure the dark background is applied */
+  color: #e0e0e0 !important; /* Ensure the text color is applied */
+}

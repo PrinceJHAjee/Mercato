@@ -1,5 +1,5 @@
 import { message, Modal, Table } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,6 +9,17 @@ import { SetLoader } from "../../../redux/lodersSlice";
 
 function Bids() {
   const [bidsData, setBidsData] = React.useState([]);
+
+  // Define the isDarkMode state
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Set the initial theme based on localStorage or other logic
+  useEffect(() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+      setIsDarkMode(true);
+    }
+  }, []);
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.users);
@@ -83,13 +94,31 @@ function Bids() {
     },
   ];
 
+  // Apply dark mode styles conditionally
+  const tableClassName = isDarkMode ? 'dark-table' : 'light-table';
+
   
 useEffect(()=>{
 getData();
 }, [])
   return (
-    <div className="flex flex-col gap-3">
-      <Table columns={columns} dataSource={bidsData} />
+    <div style={{
+      maxWidth: bidsData.length > 0 ? '1500px' : '949px',
+      backgroundColor: isDarkMode ? '#1c1c1c' : '#ffffff',
+      padding: '16px',
+      borderRadius: '8px',
+      minHeight: '100vh', // Ensure it takes the full height
+      width: '100%', // Ensure it takes the full width
+      margin: '0 auto', // Center the container
+      border: isDarkMode ? '1px solid #333' : '1px solid #ccc', // Border for dark and light mode
+    }}>
+      <Table columns={columns} dataSource={bidsData}
+       className={tableClassName}  // Apply the dark mode class
+       style={{
+        border: isDarkMode ? '1px solid #58C4DC' : '1px solid #002F34', // Border for the table itself
+        borderRadius: '8px', // Optional: Add border radius to the table
+      }}
+      />
     </div>
   );
 }

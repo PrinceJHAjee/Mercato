@@ -11,7 +11,8 @@ import moment from "moment";
 import BidModal from "./BidModal";
 
 
-function ProductInfo() {
+
+function ProductInfo({ isDarkMode, toggleDarkMode }) {
     const { user } = useSelector((state) => state.users);
   const [product, setProduct] = React.useState(null);
   const [showAddNewBid, setShowAddNewBid] = React.useState(false);
@@ -138,7 +139,9 @@ function ProductInfo() {
           {/* for product  info */}
           <div className="flex flex-col gap-3">
             <div>
-              <h1 className="text-2xl font-semibold text-[#002F34]">
+              <h1 className={`text-2xl font-semibold ${
+                  isDarkMode ? "text-[#58C4DC]" : "text-[#002F34]"
+                }`}>
                 {product.name}
               </h1>
               <span>{product.description}</span>
@@ -147,7 +150,9 @@ function ProductInfo() {
             <Dividerr />
 
             <div className="flex flex-col">
-              <h1 className="text-2xl font-semibold text-[#002F34]">
+              <h1  className={`text-2xl font-semibold ${
+                  isDarkMode ? "text-[#58C4DC]" : "text-[#002F34]"
+                }`}>
                 Product details
               </h1>
               <div className="flex justify justify-between mt-5">
@@ -196,7 +201,9 @@ function ProductInfo() {
               
               
               <div className="flex flex-col">
-              <h1 className="text-2xl font-semibold text-[#002F34]">
+              <h1  className={`text-2xl font-semibold ${
+                  isDarkMode ? "text-[#58C4DC]" : "text-[#002F34]"
+                }`}>
                 Seller Details
               </h1>
               <div className="flex justify justify-between mt-2">
@@ -225,10 +232,19 @@ function ProductInfo() {
             <Dividerr />
             <div className="flex flex-col">
                 <div className="flex justify-between mb-5" >
-                <h1 className="text-2xl font-semibold text-[#002F34]">Bids</h1>   
+                <h1 className={`text-2xl font-semibold ${
+                    isDarkMode ? "text-[#58C4DC]" : "text-[#002F34]"
+                  }`}>Bids</h1>   
                 <Button
                 onClick={() => setShowAddNewBid(!showAddNewBid)}
                 disabled={user._id === product.seller._id}
+                style={{
+                  color: isDarkMode && user._id === product.seller._id ? "#58C4DC" : "", // Light blue color for text in dark mode
+                  backgroundColor: isDarkMode && user._id === product.seller._id ? "#333" : "", // Optional: Adjust background color for dark mode
+                  cursor: user._id === product.seller._id ? "not-allowed" : "pointer", // Change cursor to indicate disabled state
+                  opacity: user._id === product.seller._id ? 0.6 : 1, // Adjust opacity for disabled state
+                }}
+
                 >
                     
                  New Bid

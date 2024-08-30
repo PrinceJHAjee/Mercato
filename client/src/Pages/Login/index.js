@@ -24,11 +24,20 @@ function Login() {
   const dispatch= useDispatch();
 
   
-  // Clear any existing token on login page load
-  useEffect(() => {
+  // Clear any existing token on login page load and dark thyeme
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     localStorage.removeItem("token");
+  //   }
+  // }, []);
+
+   // Clear any existing token and theme settings on login page load
+   useEffect(() => {
     if (localStorage.getItem("token")) {
       localStorage.removeItem("token");
     }
+    document.body.classList.remove("dark");
+    localStorage.removeItem("theme");
   }, []);
 
   const onFinish =async (values) => {
@@ -64,6 +73,8 @@ function Login() {
        navigate("/"); 
     }
    }, []);
+
+   
   
   
 

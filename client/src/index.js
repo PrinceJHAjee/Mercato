@@ -8,6 +8,8 @@ import { message } from "antd";
 import {Provider} from "react-redux"
 import store from "./redux/store";
 
+
+
 // Configure the message component to consume the context from ConfigProvider
 message.config({
   top: 100, // Example configuration, you can adjust this as needed
@@ -32,7 +34,7 @@ root.render(
         },
       }}
     >
-      <App />
+      <App/>
     </ConfigProvider>
     </Provider>
   

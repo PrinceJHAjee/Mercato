@@ -48,7 +48,7 @@ function BidModal({ showBidModal, setShowBidModal, product, reloadData }) {
     width={window.innerWidth > 768 ? 1500 : '90%'} 
     onOk={() => formRef.current.submit()}>
       <div className="flex flex-col gap-5 overflow-x-auto">
-        <h1 className="text-2xl font-semibold text-[#002F34]  text-center">
+        <h1 className="text-2xl font-semibold text-[#dde3e4]  text-center">
           New Bid
         </h1>
          <Form

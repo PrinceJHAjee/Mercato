@@ -1,6 +1,5 @@
-
 import React from "react";
-import { useEffect, useCallback, useState  } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { Avatar, Badge, message } from "antd";
 import { GetCurrentUser, RefreshToken } from "../apicalls/Users";
 import { useNavigate } from "react-router-dom";
@@ -8,15 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { SetLoader } from "../redux/lodersSlice";
 import { SetUser } from "../redux/usersSlice";
 import Notifications from "./Notifications";
-import { GetAllNotifications, ReadAllNotifications } from "../apicalls/notifications";
+import {
+  GetAllNotifications,
+  ReadAllNotifications,
+} from "../apicalls/notifications";
 
-function ProtectedPage({ children }) {
+function ProtectedPage({ children, isDarkMode, toggleDarkMode }) {
   const [notifications = [], setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const user = useSelector((state) => state.users.user);
- 
+
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const validateToken = useCallback(async () => {
     try {
@@ -25,10 +27,8 @@ function ProtectedPage({ children }) {
       dispatch(SetLoader(false));
       console.log("GetCurrentUser response:", response); // Log the response
       if (response.success) {
-        
-        
         //dispatching the user data to the redux store
-         dispatch(SetUser(response.data));
+        dispatch(SetUser(response.data));
       }
 
       //to add logic to refresh the token if it expires:
@@ -36,7 +36,7 @@ function ProtectedPage({ children }) {
         const refreshToken = localStorage.getItem("refreshToken");
         if (refreshToken) {
           const newTokenResponse = await RefreshToken(refreshToken);
-          
+
           if (newTokenResponse.success) {
             localStorage.setItem("token", newTokenResponse.data);
             validateToken(); // Call validateToken again with the new token
@@ -57,7 +57,6 @@ function ProtectedPage({ children }) {
       message.error(error.message);
     }
   }, [navigate, dispatch]);
-
 
   const getNotifications = async () => {
     try {
@@ -95,26 +94,46 @@ function ProtectedPage({ children }) {
     }
   }, [navigate, validateToken]);
 
-  return(
-     user && (
-      <div> 
+  return (
+    user && (
+      <div
+        className={
+          isDarkMode
+            ? "dark bg-[#121212] text-[#e0e0e0]"
+            : "bg-white text-[#333]"
+        }
+      >
         {/* header */}
-        <div className="flex justify-between items-center bg-primary p-5 flex-col md:flex-row">
-          <h1 className="text-white text-2xl cursor-pointer  mb-2 md:mb-0"
-          onClick={()=>navigate("/")}>Mercato</h1>
-          <div className="bg-white py-2 px-5 rounded flex gap-2 items-center">
-          
-            <span className=" cursor-pointer uppercase"
-            onClick={() => {
-              if(user.role==='user'){
-                navigate("/profile");
-              }else{
-                navigate("/admin");
-              }
-
-            }
-              
-            }>
+        <div
+          className={`flex justify-between items-center p-5 flex-col md:flex-row ${
+            isDarkMode ? "bg-[#1c1c1c]" : "bg-primary"
+          }`}
+        >
+          <h1
+            className={`text-2xl cursor-pointer mb-2 md:mb-0 ${
+              isDarkMode ? "text-primary" : "text-white"
+            }`}
+            onClick={() => navigate("/")}
+          >
+            Mercato
+          </h1>
+          <div
+            className={`py-2 px-5 rounded flex gap-2 items-center ${
+              isDarkMode ? "bg-[#2c2c2c]" : "bg-white"
+            }`}
+          >
+            <span
+              className={`cursor-pointer uppercase ${
+                isDarkMode ? "text-primary" : "text-black"
+              }`}
+              onClick={() => {
+                if (user.role === "user") {
+                  navigate("/profile");
+                } else {
+                  navigate("/admin");
+                }
+              }}
+            >
               {user.name}
             </span>
 
@@ -131,39 +150,52 @@ function ProtectedPage({ children }) {
             >
               <Avatar
                 shape="circle"
-                icon={<i className="ri-notification-3-line"></i>}
+                icon={
+                  isDarkMode ? (
+                    <i className="ri-notification-2-line"></i>
+                  ) : (
+                    <i className="ri-notification-3-line"></i>
+                  )
+                }
+                style={{ backgroundColor: isDarkMode ? "#2c2c2c" : "#ffffff" }}
               />
             </Badge>
 
+            <i
+              className={`ml-7 cursor-pointer ${
+                isDarkMode
+                  ? "ri-logout-circle-r-line text-white"
+                  : "ri-logout-circle-r-fill"
+              }`}
+              onClick={() => {
+                // Clear dark mode class from document body
+                document.body.classList.remove("dark");
 
-            <i className="ri-logout-circle-r-fill ml-7 cursor-pointer" 
-            onClick={()=>{
-              localStorage.removeItem("token");
-              navigate("/login");
-            }}></i>
+                // Clear dark mode preference from localStorage
+                localStorage.removeItem("theme");
 
+                localStorage.removeItem("token");
+                navigate("/login");
+              }}
+            ></i>
           </div>
-
         </div>
-        
+
         {/* body */}
         <div className="p-5">
           {children}
 
           {
-          <Notifications
-            notifications={notifications}
-            reloadNotifications={getNotifications}
-            showNotifications={showNotifications}
-            setShowNotifications={setShowNotifications}
-          />
-        }
-
+            <Notifications
+              notifications={notifications}
+              reloadNotifications={getNotifications}
+              showNotifications={showNotifications}
+              setShowNotifications={setShowNotifications}
+            />
+          }
         </div>
-
-        
       </div>
-     )
+    )
   );
 }
 

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class', // or 'media' if you want to use the prefers-color-scheme media query
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {

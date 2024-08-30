@@ -24,11 +24,20 @@ function Register() {
 
   
   // Clear any existing token on login page load
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     localStorage.removeItem("token");
+  //   }
+  // }, []);
+   // Clear any existing token and dark mode on register page load
+   useEffect(() => {
     if (localStorage.getItem("token")) {
       localStorage.removeItem("token");
     }
+    document.body.classList.remove("dark");
+    localStorage.removeItem("theme");
   }, []);
+
   const onFinish = async (values) => {
     
     try {
@@ -46,6 +55,7 @@ function Register() {
      
       if(response.success){
         message.success(response.message)
+        navigate("/login"); // Redirect to login after successful registration
       }else{
         message.error(response.message);
       }
@@ -62,6 +72,8 @@ function Register() {
       navigate("/"); 
    }
   }, []);
+
+  
   
    
 
